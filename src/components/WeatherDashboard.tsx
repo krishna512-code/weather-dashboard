@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { WeatherProvider } from '../contexts/WeatherContext';
 import SearchInput from './SearchInput';
@@ -7,9 +6,13 @@ import ForecastDisplay from './ForecastDisplay';
 import ErrorDisplay from './ErrorDisplay';
 import UnitToggle from './UnitToggle';
 import { useWeatherAPI } from '../hooks/useWeatherAPI';
+import { usePolling } from '../hooks/usePolling';
 
 const WeatherDashboardContent = () => {
   const { fetchWeatherData } = useWeatherAPI();
+  
+  // Initialize polling - this will now work because we're inside the WeatherProvider
+  usePolling();
 
   useEffect(() => {
     const lastCity = localStorage.getItem('lastSearchedCity') || 'London';
